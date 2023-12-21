@@ -40,7 +40,3 @@ Contribution Guidelines
 
     Feel free to open issues for bug reports or feature requests.
     Pull requests are welcome for improvements or fixes.
-
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
