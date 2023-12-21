@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Message Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="./icons8-whatsapp-gradient-32.png" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center mb-4">WhatsApp Message Generator</h1>
+        <form id="messageForm">
+          <div class="form-group">
+            <label for="phoneNumber">Enter Phone Number (Without Country Code):</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Enter phone number..." required>
+            <small class="text-danger" id="phoneError"></small>
+          </div>
+    
+          <div class="form-group">
+            <label for="message">Enter Message:</label>
+            <textarea id="message" name="message" class="form-control" rows="4" placeholder="Type your message..." required></textarea>
+            <small class="text-danger" id="messageError"></small>
+          </div>
+          
+          <button type="button" class="btn btn-primary btn-block" onclick="generateMessage()">Generate Message</button>
+        </form>
+
+        <div class="text-center mt-4">
+          <h2>
+            <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/github.png" alt="github"/>
+            Developed By <a href="https://github.com/salmanck66">Salmanck66</a>
+          </h2>
+        </div>
+    </div>
+    
+    <script src="./index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function generateMessage() {
+            const phoneNumberInput = document.getElementById('phoneNumber');
+            const messageInput = document.getElementById('message');
+            const phoneError = document.getElementById('phoneError');
+            const messageError = document.getElementById('messageError');
+
+            phoneError.textContent = '';
+            messageError.textContent = '';
+
+            if (!phoneNumberInput.value.trim()) {
+                phoneError.textContent = 'Phone number cannot be empty';
+                return;
+            }
+            if (phoneNumberInput.value.length !== 10) {
+                phoneError.textContent = 'Phone number should be 10 numbers';
+                return;
+            }
+
+            if (!messageInput.value.trim()) {
+                messageError.textContent = 'Message cannot be empty';
+                return;
+            }
+
+           
+            const phoneNumber = encodeURIComponent(phoneNumberInput.value);
+            const message = encodeURIComponent(messageInput.value);
+            const whatsappLink = `https://api.whatsapp.com/send?phone=+91${phoneNumber}&text=${message}`;
+            window.open(whatsappLink, '_blank');
+        }
+    </script>
+</body>
+</html>
